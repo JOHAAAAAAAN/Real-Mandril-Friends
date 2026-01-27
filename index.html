@@ -3,67 +3,52 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Liga de los Amigos - Estadísticas</title>
+    <title>Liga Real Mandril</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Teko:wght@400;600&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
 
-    <div class="container">
-        <header>
-            <h1>🏆 Liga Semanal</h1>
-            <p>Estadísticas oficiales</p>
-        </header>
+    <div class="app-container">
+        <aside class="sidebar">
+            <div class="logo">⚽ RM Stats</div>
+            <nav>
+                <button onclick="cargarDatos('anual')" class="active" id="btn-anual">📅 TABLA ANUAL</button>
+                <hr>
+                <button onclick="cargarDatos(1)">Enero</button>
+                <button onclick="cargarDatos(2)">Febrero</button>
+                <button onclick="cargarDatos(3)">Marzo</button>
+                <hr>
+                <a href="formulario.html" class="btn-add">+ Añadir Resultado</a>
+            </nav>
+        </aside>
 
-        <div class="table-wrapper">
-            <table>
-                <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>Jugador</th>
-                        <th title="Victorias / Derrotas">V / D</th>
-                        <th title="Porcentaje de Victoria">% Win</th>
-                        <th title="Partidos Jugados">PJ</th>
-                        <th class="desktop-only">Racha</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr class="leader">
-                        <td>1</td>
-                        <td class="player-name">Isra 👑</td>
-                        <td>6 / 0</td>
-                        <td><span class="badge green">100%</span></td>
-                        <td>6</td>
-                        <td class="desktop-only">🔥🔥🔥🔥🔥🔥</td>
-                    </tr>
-                    
-                    <tr>
-                        <td>2</td>
-                        <td class="player-name">Mois</td>
-                        <td>4 / 1</td>
-                        <td><span class="badge blue">80%</span></td>
-                        <td>5</td>
-                        <td class="desktop-only">🔥🔥🔥</td>
-                    </tr>
+        <main class="content">
+            <header>
+                <h1 id="titulo-pagina">Tabla Anual</h1>
+                <p>Estadísticas en tiempo real</p>
+            </header>
 
-                    <tr>
-                        <td>3</td>
-                        <td class="player-name">Seba</td>
-                        <td>3 / 3</td>
-                        <td><span class="badge yellow">50%</span></td>
-                        <td>6</td>
-                        <td class="desktop-only">❄️</td>
-                    </tr>
-                    
-                    </tbody>
-            </table>
-        </div>
-
-        <footer>
-            <p>Última actualización: Hoy</p>
-        </footer>
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Rk</th>
+                            <th>Jugador</th>
+                            <th>V / D</th>
+                            <th>% Win</th>
+                            <th>Goles ⚽</th>
+                            <th>PJ</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tabla-body">
+                        </tbody>
+                </table>
+            </div>
+        </main>
     </div>
 
+    <script src="data.js"></script>
+    <script src="app.js"></script>
 </body>
-
 </html>

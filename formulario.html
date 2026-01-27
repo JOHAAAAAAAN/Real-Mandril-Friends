@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Añadir Resultado</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body style="display:block; padding:20px;">
+    
+    <div class="container" style="max-width:500px; margin:0 auto;">
+        <a href="index.html" style="color:#00e676; text-decoration:none;">← Volver a la tabla</a>
+        <h1 style="margin-top:20px;">Nuevo Partido</h1>
+        
+        <form id="matchForm" style="background:#1e1e1e; padding:20px; border-radius:10px;">
+            <label>Mes (Número):</label>
+            <input type="number" id="mes" value="1" style="width:100%; padding:10px; margin-bottom:10px;">
+
+            <label>Jugador:</label>
+            <select id="jugador" style="width:100%; padding:10px; margin-bottom:10px;">
+                <option value="Isra">Isra</option>
+                <option value="Mois">Mois</option>
+                <option value="Seba">Seba</option>
+            </select>
+
+            <label>Resultado:</label>
+            <select id="resultado" style="width:100%; padding:10px; margin-bottom:10px;">
+                <option value="V">Victoria</option>
+                <option value="D">Derrota</option>
+            </select>
+
+            <label>Goles:</label>
+            <input type="number" id="goles" value="0" style="width:100%; padding:10px; margin-bottom:20px;">
+
+            <button type="button" onclick="generarCodigo()" class="btn-add">Generar Código</button>
+        </form>
+
+        <div id="resultadoCodigo" style="margin-top:20px; display:none;">
+            <p>Copia esto y pégalo en data.js:</p>
+            <textarea id="codigoFinal" style="width:100%; height:80px; background:#000; color:#00e676; border:none; padding:10px;"></textarea>
+        </div>
+    </div>
+
+    <script>
+        function generarCodigo() {
+            const m = document.getElementById('mes').value;
+            const j = document.getElementById('jugador').value;
+            const r = document.getElementById('resultado').value;
+            const g = document.getElementById('goles').value;
+
+            const texto = `{ mes: ${m}, jugador: "${j}", resultado: "${r}", goles: ${g} },`;
+            
+            document.getElementById('resultadoCodigo').style.display = 'block';
+            document.getElementById('codigoFinal').value = texto;
+        }
+    </script>
+</body>
+</html>
