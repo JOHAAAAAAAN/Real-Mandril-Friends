@@ -15,9 +15,8 @@
             <nav>
                 <button onclick="cargarDatos('anual')" class="active" id="btn-anual">📅 TABLA ANUAL</button>
                 <hr>
-                <button onclick="cargarDatos(1)">Enero</button>
-                <button onclick="cargarDatos(2)">Febrero</button>
-                <button onclick="cargarDatos(3)">Marzo</button>
+                <div id="menu-meses"></div>
+                
                 <hr>
                 <a href="formulario.html" class="btn-add">+ Añadir Resultado</a>
             </nav>
@@ -38,7 +37,7 @@
                             <th>V / D</th>
                             <th>% Win</th>
                             <th>Goles ⚽</th>
-                            <th>PJ</th>
+                            <th>Racha</th> <th>PJ</th>
                         </tr>
                     </thead>
                     <tbody id="tabla-body">
