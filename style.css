@@ -1,4 +1,4 @@
-/* style.css */
+/* style.css COMPLETO */
 * { box-sizing: border-box; margin: 0; padding: 0; }
 
 body {
@@ -12,7 +12,7 @@ body {
     min-height: 100vh;
 }
 
-/* --- SIDEBAR MEJORADA --- */
+/* --- SIDEBAR (MENÚ) --- */
 .sidebar {
     width: 250px;
     background-color: #1e1e1e;
@@ -31,9 +31,8 @@ body {
     text-shadow: 0 0 10px rgba(0, 230, 118, 0.3);
 }
 
-/* Nuevo estilo unificado para botones */
 .nav-btn {
-    background-color: #2c2c2c; /* Fondo gris oscuro por defecto */
+    background-color: #2c2c2c;
     border: 1px solid #333;
     color: #888;
     width: 100%;
@@ -41,38 +40,37 @@ body {
     text-align: left;
     cursor: pointer;
     font-size: 1.1rem;
-    margin-bottom: 10px; /* Espacio entre botones */
+    margin-bottom: 10px;
     border-radius: 8px;
-    transition: all 0.3s ease; /* Suavidad al animar */
+    transition: all 0.3s ease;
     display: flex;
     align-items: center;
-    gap: 10px; /* Espacio entre icono y texto */
+    gap: 10px;
     font-weight: bold;
 }
 
-/* Efecto HOVER (Crecimiento) */
 .nav-btn:hover {
     background-color: #333;
     color: #fff;
-    transform: scale(1.05); /* Crece un 5% */
+    transform: scale(1.05);
     border-color: #555;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
 }
 
-/* Botón Activo (Seleccionado) */
 .nav-btn.active {
-    background-color: #00e676; /* Verde */
-    color: #000; /* Texto negro */
+    background-color: #00e676;
+    color: #000;
     border-color: #00e676;
     transform: scale(1.05);
+    box-shadow: 0 0 15px rgba(0, 230, 118, 0.4);
 }
 
+hr { border: 0; border-top: 1px solid #333; margin: 20px 0; }
 
 /* --- CONTENIDO --- */
 .content {
     flex: 1;
     padding: 40px;
-    overflow: hidden; /* Evita scroll doble */
+    overflow: hidden;
 }
 
 header h1 {
@@ -82,32 +80,24 @@ header h1 {
     margin-bottom: 10px;
 }
 
-/* --- TABLA RESPONSIVE ARREGLADA --- */
+/* --- TABLA --- */
 .table-wrapper {
     background: #1e1e1e;
     border-radius: 12px;
     box-shadow: 0 4px 15px rgba(0,0,0,0.5);
-    overflow-x: auto; /* Permite scroll horizontal */
+    overflow-x: auto; /* Scroll horizontal en celular */
     margin-top: 20px;
     border: 1px solid #333;
 }
 
-table { 
-    width: 100%; 
-    border-collapse: collapse; 
-}
+table { width: 100%; border-collapse: collapse; }
 
-/* Esto arregla el diseño en celular: */
 th, td { 
-    padding: 15px 20px; /* Más espacio lateral */
-    text-align: center; /* Centrado para que se vea mejor */
+    padding: 15px 20px;
+    text-align: center;
     border-bottom: 1px solid #333; 
-    white-space: nowrap; /* IMPORTANTE: Prohíbe que el texto se parta en 2 lineas */
-}
-
-/* Alinear nombres a la izquierda */
-td.player-name, th:nth-child(2) {
-    text-align: left;
+    white-space: nowrap; /* Evita que el texto se parta en celular */
+    vertical-align: middle;
 }
 
 th { 
@@ -118,41 +108,42 @@ th {
     letter-spacing: 1px;
 }
 
+/* --- ESTILOS DE JUGADOR (FOTO + NOMBRE) --- */
+/* La celda completa */
+.player-cell {
+    display: flex;
+    align-items: center;
+    gap: 12px; /* Espacio entre foto y nombre */
+    text-align: left;
+    min-width: 150px;
+}
+
+/* La foto redonda */
+.avatar {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #444;
+}
+
 .player-name {
     font-weight: bold;
     font-size: 1.1rem;
     color: #fff;
 }
 
-.badge { padding: 5px 10px; border-radius: 6px; font-weight: bold; color: #000; font-size: 0.9rem; }
 .gold { color: #ffd700; font-size: 1.2rem; }
 
-/* --- RESPONSIVE CELULAR --- */
+/* BADGES DE COLOR */
+.badge { padding: 5px 10px; border-radius: 6px; font-weight: bold; color: #000; font-size: 0.9rem; }
+
+/* --- CELULAR --- */
 @media (max-width: 768px) {
     .app-container { flex-direction: column; }
-    
-    .sidebar { 
-        width: 100%; 
-        padding: 10px; 
-        border-right: none;
-        border-bottom: 1px solid #333;
-    }
-    
-    .sidebar nav {
-        display: flex;
-        overflow-x: auto; /* Menú deslizable horizontalmente */
-        gap: 10px;
-        padding-bottom: 5px;
-    }
-
-    .nav-btn {
-        width: auto; /* Que el botón se ajuste al texto */
-        white-space: nowrap;
-        margin-bottom: 0;
-        padding: 10px 20px;
-        font-size: 1rem;
-    }
-
+    .sidebar { width: 100%; padding: 10px; border-right: none; border-bottom: 1px solid #333; }
+    .sidebar nav { display: flex; overflow-x: auto; gap: 10px; padding-bottom: 5px; }
+    .nav-btn { width: auto; white-space: nowrap; margin-bottom: 0; padding: 10px 20px; font-size: 1rem; }
     .content { padding: 20px; }
     header h1 { font-size: 2.5rem; }
 }
