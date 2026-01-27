@@ -8,7 +8,6 @@ function renderizarMenu() {
     const mesActual = fechaHoy.getMonth() + 1; 
 
     let html = "";
-    // Ahora generamos botones con la clase 'nav-btn' y el ícono
     for (let i = 1; i <= mesActual; i++) {
         html += `<button onclick="cargarDatos(${i})" class="nav-btn">📅 ${nombresMeses[i]}</button>`;
     }
@@ -37,21 +36,26 @@ function calcularRacha(nombreJugador, partidos) {
 function cargarDatos(filtro) {
     const tbody = document.getElementById("tabla-body");
     const titulo = document.getElementById("titulo-pagina");
-    tbody.innerHTML = "";
-
-    // Reseteamos la clase 'active' de todos los botones
-    document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+    const headerRacha = document.getElementById("header-racha"); // Referencia al encabezado
     
-    // Identificamos qué botón activar
+    tbody.innerHTML = "";
+    document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+
+    // Configuración según si es ANUAL o MENSUAL
     if (filtro === 'anual') {
         titulo.innerText = "🏆 Tabla Anual Global";
         document.getElementById('btn-anual').classList.add('active');
+        
+        // OCULTAR columna de Racha en la anual
+        if(headerRacha) headerRacha.style.display = "none";
+        
     } else {
         titulo.innerText = "📅 Estadísticas de " + nombresMeses[filtro];
-        // Buscamos el botón que contenga el texto del mes para activarlo
-        // (Un pequeño truco para no usar IDs complejos)
         let botones = document.querySelectorAll('#menu-meses button');
         if(botones[filtro - 1]) botones[filtro - 1].classList.add('active');
+
+        // MOSTRAR columna de Racha en mensual
+        if(headerRacha) headerRacha.style.display = ""; // "" vuelve al valor por defecto (visible)
     }
 
     let partidosFiltrados = dataPartidos;
@@ -66,6 +70,8 @@ function cargarDatos(filtro) {
         let goles = misPartidos.reduce((acc, curr) => acc + curr.goles, 0);
         let jugados = victorias + derrotas;
         let winRate = jugados > 0 ? Math.round((victorias / jugados) * 100) : 0;
+        
+        // Calculamos racha siempre, pero solo la mostraremos si no es anual
         let racha = calcularRacha(nombre, misPartidos);
 
         return { nombre, victorias, derrotas, goles, jugados, winRate, racha };
@@ -74,8 +80,23 @@ function cargarDatos(filtro) {
     stats.sort((a, b) => b.winRate - a.winRate || b.victorias - a.victorias);
 
     stats.forEach((jugador, index) => {
-        let colorBadge = jugador.winRate >= 80 ? '#00e676' : (jugador.winRate >= 50 ? '#ffea00' : '#ff1744');
+        // LÓGICA DE COLORES NUEVA
+        let colorBadge;
+        if (jugador.winRate > 90) {
+            colorBadge = '#00e676'; // Verde (Mayor a 90%)
+        } else if (jugador.winRate >= 70) {
+            colorBadge = '#2979ff'; // Azul (70% - 89%)
+        } else if (jugador.winRate >= 60) {
+            colorBadge = '#ff9100'; // Naranja (60% - 69%)
+        } else if (jugador.winRate >= 50) {
+            colorBadge = '#ffea00'; // Amarillo (50% - 59%)
+        } else {
+            colorBadge = '#ff1744'; // Rojo (Menos de 50%)
+        }
         
+        // Construimos la celda de racha SOLO si no es anual
+        let celdaRacha = filtro !== 'anual' ? `<td>${jugador.racha}</td>` : '';
+
         let fila = `
             <tr>
                 <td class="${index === 0 ? 'gold' : ''}">#${index + 1}</td>
@@ -83,13 +104,17 @@ function cargarDatos(filtro) {
                 <td>${jugador.victorias} / ${jugador.derrotas}</td>
                 <td><span class="badge" style="background-color:${colorBadge}">${jugador.winRate}%</span></td>
                 <td>${jugador.goles}</td>
-                <td>${jugador.racha}</td>
-                <td>${jugador.jugados}</td>
+                ${celdaRacha} <td>${jugador.jugados}</td>
             </tr>
         `;
         tbody.innerHTML += fila;
     });
 }
 
-renderizarMenu();     
-cargarDatos('anual');
+// INICIALIZACIÓN
+renderizarMenu();
+
+// Lógica para abrir el MES ACTUAL por defecto
+const fechaHoy = new Date();
+const mesActualInicial = fechaHoy.getMonth() + 1; // Enero = 1
+cargarDatos(mesActualInicial);
