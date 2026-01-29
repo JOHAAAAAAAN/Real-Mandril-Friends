@@ -26,6 +26,12 @@ const dataPartidos = [
     { mes: 1, jugador: "Isra", resultado: "V", goles: 0 },
     { mes: 1, jugador: "Mois", resultado: "V", goles: 0 },
     { mes: 1, jugador: "Seba", resultado: "D", goles: 0 },
+    
+    { mes: 1, jugador: "Isra", resultado: "V", goles: 0 },
+    { mes: 1, jugador: "Mois", resultado: "D", goles: 1 },
+    { mes: 1, jugador: "Seba", resultado: "V", goles: 3 },
+    
+    
     // Partidos de ejemplo de Febrero
     //{ mes: 2, jugador: "Isra", resultado: "V", goles: 4 },
     //{ mes: 2, jugador: "Mois", resultado: "V", goles: 6 },
