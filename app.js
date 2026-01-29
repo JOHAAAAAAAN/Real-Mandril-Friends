@@ -103,8 +103,8 @@ function cargarDatos(filtro) {
         let colorBadge;
         if (jugador.winRate > 90) colorBadge = '#00e676';      // Verde (>90%)
         else if (jugador.winRate >= 70) colorBadge = '#2979ff'; // Azul (70-89%)
-        else if (jugador.winRate >= 60) colorBadge = '#ff9100'; // Naranja (60-69%)
-        else if (jugador.winRate >= 50) colorBadge = '#ffea00'; // Amarillo (50-59%)
+        else if (jugador.winRate >= 60) colorBadge = '#ffea00'; // Naranja (60-69%)
+        else if (jugador.winRate >= 50) colorBadge = '#ff9100'; // Amarillo (50-59%)
         else colorBadge = '#ff1744';                            // Rojo (<50%)
         
         // Celda Racha (vacía si es anual)
